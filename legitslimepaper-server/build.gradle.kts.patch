@@ -1,6 +1,6 @@
 --- a/aspaper-server/build.gradle.kts
 +++ b/aspaper-server/build.gradle.kts
-@@ -32,7 +_,22 @@
+@@ -33,7 +_,22 @@
          }
      }
  
@@ -8,23 +8,23 @@
 +    val legitslimepaper = forks.register("legitslimepaper") {
 +        forks = aspaper
 +        upstream.patchRepo("paperServer") {
-+                upstreamRepo = aspaper.patchedRepo("paperServer")
-+                patchesDir = rootDirectory.dir("legitslimepaper-server/paper-patches")
-+                outputDir = rootDirectory.dir("paper-server")
-+            }
++            upstreamRepo = aspaper.patchedRepo("paperServer")
++            patchesDir = rootDirectory.dir("legitslimepaper-server/paper-patches")
++            outputDir = rootDirectory.dir("paper-server")
++        }
 +        upstream.patchDir("aspaperServer") {
-+                upstreamPath = "aspaper-server"
-+                excludes = setOf("src/minecraft", "paper-patches", "minecraft-patches", "build.gradle.kts", "build.gradle.kts.patch")
-+                patchesDir = rootDirectory.dir("legitslimepaper-server/aspaper-patches")
-+                outputDir = rootDirectory.dir("aspaper-server")
-+            }
++            upstreamPath = "aspaper-server"
++            excludes = setOf("src/minecraft", "paper-patches", "minecraft-patches", "build.gradle.kts", "build.gradle.kts.patch")
++            patchesDir = rootDirectory.dir("legitslimepaper-server/aspaper-patches")
++            outputDir = rootDirectory.dir("aspaper-server")
++        }
 +    }
 +
 +    activeFork = legitslimepaper
  
      spigot {
-         enabled = true
-@@ -119,10 +_,14 @@
+         enabled = false
+@@ -120,10 +_,14 @@
      main {
          java { srcDir("../paper-server/src/main/java") }
          resources { srcDir("../paper-server/src/main/resources") }
@@ -46,14 +46,14 @@
 -    implementation(project(":aspaper-api")) //ASP
 +    implementation(project(":legitslimepaper-api")) //ASP + Moose
      implementation(project(":core")) //ASP
-     implementation("ca.spottedleaf:concurrentutil:0.0.7")
+     implementation("ca.spottedleaf:concurrentutil:0.0.3")
      implementation("org.jline:jline-terminal-ffm:3.27.1") // use ffm on java 22+
-@@ -221,14 +_,14 @@
+@@ -227,14 +_,14 @@
          val gitBranch = git.exec(providers, "rev-parse", "--abbrev-ref", "HEAD").get().trim()
          attributes(
              "Main-Class" to "org.bukkit.craftbukkit.Main",
 -            "Implementation-Title" to "AdvancedSlimePaper", //ASP
-+            "Implementation-Title" to "LegitSlimePaper", // Moose
++            "Implementation-Title" to "LegitSlimePaper", //Moose
              "Implementation-Version" to implementationVersion,
              "Implementation-Vendor" to date,
 -            "Specification-Title" to "AdvancedSlimePaper", //ASP
